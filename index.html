@@ -429,6 +429,182 @@
       box-shadow: 0 0 20px #fff;
     }
 
+    /* ---------- PAPER-PLANE NOTES ---------- */
+    .plane-sky {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      min-height: 220px;
+      margin: 8px auto 28px;
+      overflow: hidden;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.2) 0%, rgba(255, 240, 245, 0.45) 100%);
+      border: 1px solid var(--glass-border);
+    }
+    .plane-sky svg.clouds { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.45; }
+    .flyer {
+      position: absolute;
+      left: -80px;
+      top: 40%;
+      width: 56px;
+      height: 56px;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .flyer.go {
+      animation: planeFly 2.4s ease-in-out forwards;
+    }
+    @keyframes planeFly {
+      0% { opacity: 0; transform: translate(0, 0) rotate(-12deg) scale(0.7); }
+      12% { opacity: 1; }
+      50% { transform: translate(42vw, -36px) rotate(8deg) scale(1); }
+      100% { opacity: 0; transform: translate(85vw, 18px) rotate(18deg) scale(0.85); }
+    }
+    .note-form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 620px;
+      margin-bottom: 28px;
+    }
+    .note-form input {
+      flex: 1 1 240px;
+      min-width: 0;
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark-text);
+      outline: none;
+      box-shadow: var(--shadow);
+    }
+    .note-form input:focus { border-color: rgba(255, 127, 80, 0.45); }
+    .note-form input::placeholder { color: var(--muted); }
+    .send-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(90deg, #FF7F50, #FF6B6B);
+      box-shadow: 0 10px 24px rgba(255, 127, 80, 0.28);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .send-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(255, 127, 80, 0.36); }
+    .note-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      width: 100%;
+      max-width: 900px;
+    }
+    .plane-note {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      padding: 20px 22px 18px;
+      text-align: left;
+      box-shadow: var(--shadow);
+      transform: rotate(var(--tilt, -1.5deg));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .plane-note:hover { transform: rotate(0deg) translateY(-4px); box-shadow: 0 18px 36px rgba(255, 127, 80, 0.12); }
+    .plane-note .stamp {
+      font-size: 0.72rem;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-bottom: 8px;
+    }
+    .plane-note p { color: var(--dark-text); line-height: 1.65; font-size: 0.95rem; }
+    .plane-note .from { display: block; margin-top: 12px; font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: var(--coral); }
+
+    /* ---------- FRIENDSHIP RECIPE ---------- */
+    .recipe-card {
+      width: 100%;
+      max-width: 520px;
+      background:
+        repeating-linear-gradient(
+          transparent,
+          transparent 27px,
+          rgba(255, 127, 80, 0.08) 28px
+        ),
+        linear-gradient(180deg, #fffdf8 0%, #fff6ea 100%);
+      border: 1px solid rgba(255, 179, 0, 0.22);
+      border-radius: 8px 8px 18px 18px;
+      box-shadow: var(--shadow), 0 0 0 8px rgba(255, 250, 240, 0.7);
+      padding: 36px 40px 32px;
+      text-align: left;
+      position: relative;
+    }
+    .recipe-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 14px;
+      background: repeating-linear-gradient(
+        90deg,
+        #FF7F50 0 18px,
+        #FFD075 18px 36px,
+        #FFB6C1 36px 54px,
+        #FFF5E6 54px 72px
+      );
+      border-radius: 8px 8px 0 0;
+    }
+    .recipe-kicker {
+      font-size: 0.72rem;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin: 8px 0 6px;
+    }
+    .recipe-card h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.4rem;
+      color: var(--coral);
+      margin-bottom: 6px;
+    }
+    .recipe-yield {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+      font-style: italic;
+    }
+    .recipe-list { list-style: none; }
+    .recipe-list li {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      padding: 9px 0;
+      border-bottom: 1px dashed rgba(255, 127, 80, 0.18);
+      color: var(--dark-text);
+      line-height: 1.5;
+    }
+    .recipe-list li:last-child { border-bottom: none; }
+    .recipe-amt {
+      flex: 0 0 108px;
+      font-weight: 600;
+      color: var(--coral);
+      font-size: 0.92rem;
+    }
+    .recipe-foot {
+      margin-top: 22px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.35rem;
+      color: var(--coral);
+      text-align: center;
+    }
+
     footer {
       padding: 12px 20px 28px;
       font-size: 0.9rem;
@@ -460,6 +636,16 @@
       }
       .envelope { width: 260px; height: 174px; }
       .big-btn { font-size: 1.2rem; padding: 16px 36px; }
+      .recipe-card { padding: 28px 22px 24px; }
+      .recipe-amt { flex: 0 0 88px; font-size: 0.82rem; }
+      .recipe-card h3 { font-size: 2rem; }
+      .plane-sky { min-height: 160px; }
+      @keyframes planeFly {
+        0% { opacity: 0; transform: translate(0, 0) rotate(-12deg) scale(0.7); }
+        12% { opacity: 1; }
+        50% { transform: translate(48vw, -24px) rotate(8deg) scale(1); }
+        100% { opacity: 0; transform: translate(78vw, 12px) rotate(18deg) scale(0.85); }
+      }
     }
 
     @media (max-width: 420px) {
@@ -471,7 +657,7 @@
     @media (prefers-reduced-motion: reduce) {
       body { animation: none; }
       .reveal { opacity: 1; transform: none; transition: none; }
-      .dash, .pulse, .big-btn { animation: none; }
+      .dash, .pulse, .big-btn, .flyer.go { animation: none; }
     }
 
     @media (hover: none), (pointer: coarse) {
@@ -666,6 +852,41 @@
       <div class="paper" id="paper"><span id="letterText"></span></div>
     </section>
 
+    <section id="planes">
+      <h2 class="title reveal">Paper-Plane Notes</h2>
+      <p class="lead reveal">Write a tiny wish and send it across the sky</p>
+      <div class="plane-sky reveal" aria-hidden="true">
+        <svg class="clouds" viewBox="0 0 720 220" preserveAspectRatio="none">
+          <ellipse cx="120" cy="50" rx="70" ry="22" fill="#fff"/>
+          <ellipse cx="170" cy="50" rx="48" ry="16" fill="#fff"/>
+          <ellipse cx="480" cy="36" rx="80" ry="24" fill="#fff"/>
+          <ellipse cx="540" cy="36" rx="50" ry="16" fill="#fff"/>
+          <ellipse cx="320" cy="90" rx="60" ry="18" fill="#fff8f0"/>
+        </svg>
+        <svg class="flyer" id="paperPlane" viewBox="0 0 64 64" fill="none">
+          <path d="M4 32 L60 8 L28 36 L24 56 L36 38 L60 8" stroke="#FF7F50" stroke-width="2.4" stroke-linejoin="round" fill="#FFF5E6"/>
+          <path d="M28 36 L60 8" stroke="#FFB300" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <form class="note-form reveal" id="noteForm">
+        <input id="noteInput" maxlength="120" autocomplete="off" placeholder="A note that can fly to Rhian...">
+        <button type="submit" class="send-btn">Send plane</button>
+      </form>
+      <div class="note-board" id="noteBoard"></div>
+    </section>
+
+    <section id="recipe">
+      <h2 class="title reveal">Friendship Recipe</h2>
+      <p class="lead reveal">Keep warm. Share often. Never overbake the distance.</p>
+      <article class="recipe-card reveal">
+        <p class="recipe-kicker">From Dhaka, with care</p>
+        <h3>Best Friend, Slow-Cooked</h3>
+        <p class="recipe-yield">Yields: one rare friendship &middot; Serves: two hearts</p>
+        <ul class="recipe-list" id="recipeList"></ul>
+        <p class="recipe-foot">Best served across oceans, anytime.</p>
+      </article>
+    </section>
+
     <section id="final">
       <h2 class="title reveal">Make a Wish ✨</h2>
       <button id="surpriseBtn" class="big-btn reveal">Release Lanterns 🏮</button>
@@ -691,7 +912,19 @@
         { src: "images/3.jpg", caption: "Good times" }, { src: "images/4.jpg", caption: "Always together" }
       ],
       letter: `Dear {name},\n\nOn October 4, a simple hello between Dhaka and the Philippines turned into something I am really thankful for.\n\nYou make me laugh, you listen, and you make the distance feel small. I hope this is only the beginning of our story.\n\nThank you for being my friend, and for being you. ✨\n\nYour friend,\n{from}`,
-      finalMessage: "Thank you for being my best friend, Rhian ✨\nFrom Dhaka with love! 🇧🇩❤️🇵🇭"
+      finalMessage: "Thank you for being my best friend, Rhian ✨\nFrom Dhaka with love! 🇧🇩❤️🇵🇭",
+      planeNotes: [
+        { stamp: "Flight 01", text: "A hello that crossed an ocean and still feels close.", from: "Riyad" },
+        { stamp: "Flight 02", text: "Saving you a seat in every future conversation.", from: "Dhaka" }
+      ],
+      recipe: [
+        { amt: "1 cup", item: "laughter that arrives even through a laggy call" },
+        { amt: "2 cups", item: "patience for time zones, delayed replies, and long days" },
+        { amt: "3 spoons", item: "honesty, stirred in slowly" },
+        { amt: "a pinch", item: "shared playlists and unsent drafts we still mean" },
+        { amt: "1 handful", item: "inside jokes that only two people understand" },
+        { amt: "to taste", item: "hope for the day the map finally folds in half" }
+      ]
     };
 
     const $ = s => document.querySelector(s);     const $$ = s => document.querySelectorAll(s);
@@ -890,6 +1123,43 @@
       });
     }, { threshold: 0.15 });
     $$('.reveal').forEach(el => io.observe(el));
+
+    const noteBoard = $('#noteBoard');
+    const recipeList = $('#recipeList');
+    const paperPlane = $('#paperPlane');
+
+    recipeList.innerHTML = CONFIG.recipe.map(r =>
+      `<li><span class="recipe-amt">${r.amt}</span><span>${r.item}</span></li>`
+    ).join('');
+
+    const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function renderNotes(list) {
+      noteBoard.innerHTML = list.map((n, i) => {
+        const tilt = ((i % 2 ? 1 : -1) * (1.2 + (i % 3) * 0.6)).toFixed(1);
+        return `<article class="plane-note reveal in" style="--tilt:${tilt}deg"><p class="stamp">${escapeHtml(n.stamp)}</p><p>${escapeHtml(n.text)}</p><span class="from">— ${escapeHtml(n.from)}</span></article>`;
+      }).join('');
+    }
+
+    const notes = CONFIG.planeNotes.slice();
+    renderNotes(notes);
+
+    $('#noteForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const input = $('#noteInput');
+      const text = (input.value || '').trim();
+      if (!text) return;
+      paperPlane.classList.remove('go');
+      void paperPlane.offsetWidth;
+      paperPlane.classList.add('go');
+      notes.unshift({
+        stamp: 'Flight ' + String(notes.length + 1).padStart(2, '0'),
+        text,
+        from: CONFIG.yourName
+      });
+      renderNotes(notes);
+      input.value = '';
+    });
 
     function runCounter() {
       const total = Math.max(0, Math.floor((Date.now() - new Date(CONFIG.metDate).getTime()) / 86400000));
