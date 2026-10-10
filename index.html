@@ -605,6 +605,117 @@
       text-align: center;
     }
 
+    /* ---------- MESSAGE IN A BOTTLE ---------- */
+    .sea {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      height: 340px;
+      margin: 8px auto 28px;
+      overflow: hidden;
+      border-radius: 28px;
+      background:
+        radial-gradient(ellipse at 70% 10%, rgba(255, 214, 170, 0.45), transparent 46%),
+        linear-gradient(180deg, #9ad4e8 0%, #4fa3c4 38%, #1e6f8a 72%, #0f4c63 100%);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+    }
+    .sea-spark {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.55) 0 2px, transparent 3px),
+        radial-gradient(circle at 72% 16%, rgba(255,255,255,0.4) 0 1.5px, transparent 3px),
+        radial-gradient(circle at 44% 30%, rgba(255,248,220,0.5) 0 2px, transparent 3px);
+    }
+    .wave {
+      position: absolute;
+      left: -10%;
+      width: 120%;
+      height: 90px;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .wave.w1 { bottom: 42px; animation: waveDrift 7s ease-in-out infinite; }
+    .wave.w2 { bottom: 18px; opacity: 0.7; animation: waveDrift 9s ease-in-out infinite reverse; }
+    .wave.w3 { bottom: -8px; opacity: 0.9; height: 70px; animation: waveDrift 11s ease-in-out infinite; }
+    @keyframes waveDrift {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-28px); }
+    }
+    .bottle-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 58px;
+      width: 92px;
+      height: 200px;
+      transform: translateX(-50%);
+      transform-origin: 50% 90%;
+      animation: bottleBob 3.6s ease-in-out infinite;
+      cursor: none;
+      z-index: 2;
+      filter: drop-shadow(0 10px 16px rgba(8, 40, 56, 0.35));
+    }
+    .bottle-wrap:focus { outline: none; }
+    .bottle-wrap:hover { filter: drop-shadow(0 12px 20px rgba(255, 179, 0, 0.28)); }
+    @keyframes bottleBob {
+      0%, 100% { transform: translateX(-50%) rotate(-7deg) translateY(0); }
+      50% { transform: translateX(-50%) rotate(6deg) translateY(-10px); }
+    }
+    .bottle-wrap.open { animation: none; transform: translateX(-50%) rotate(0) translateY(-6px); }
+    .cork {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      width: 28px;
+      height: 22px;
+      margin-left: -14px;
+      border-radius: 6px 6px 4px 4px;
+      background: linear-gradient(90deg, #c48a4a, #e0b06a 45%, #b57838);
+      z-index: 3;
+      transition: transform 0.7s ease, opacity 0.7s ease;
+    }
+    .bottle-wrap.open .cork { transform: translateY(-42px) rotate(-18deg); opacity: 0; }
+    .scroll-paper {
+      width: min(92%, 520px);
+      min-height: 0;
+      max-height: 0;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fff8e8, #f3e2c4);
+      border: 1px solid rgba(180, 130, 70, 0.28);
+      border-radius: 6px 18px 18px 6px;
+      box-shadow: var(--shadow);
+      padding: 0 28px;
+      opacity: 0;
+      transition: max-height 0.9s ease, padding 0.6s ease, opacity 0.5s ease;
+    }
+    .scroll-paper.open {
+      max-height: 420px;
+      min-height: 140px;
+      padding: 28px 30px 24px;
+      opacity: 1;
+      margin-bottom: 8px;
+    }
+    .scroll-paper p {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.35rem, 3.4vw, 1.85rem);
+      line-height: 1.55;
+      color: var(--dark-text);
+    }
+    .scroll-sign {
+      display: block;
+      margin-top: 14px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.25rem;
+      color: var(--coral);
+    }
+    .bottle-hint {
+      margin-top: 4px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
     footer {
       padding: 12px 20px 28px;
       font-size: 0.9rem;
@@ -674,6 +785,11 @@
         line-height: 1.55;
       }
       .paper.open { padding: 22px 18px; margin-bottom: 18px; }
+      .sea { height: 280px; }
+      .bottle-wrap { width: 74px; height: 164px; bottom: 48px; }
+      .bottle-wrap svg { width: 74px; height: 164px; }
+      .scroll-paper p { font-size: 1.28rem; }
+      .scroll-paper.open { padding: 20px 18px 18px; }
     }
 
     @media (max-width: 420px) {
@@ -922,6 +1038,45 @@
       </article>
     </section>
 
+    <section id="bottle">
+      <h2 class="title reveal">Message in a Bottle</h2>
+      <p class="lead reveal">It drifted from the Bay of Bengal to your shore. Tap the bottle.</p>
+      <div class="sea reveal" id="sea">
+        <div class="sea-spark"></div>
+        <svg class="wave w1" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+          <path fill="rgba(255,255,255,0.28)" d="M0,60 C180,100 360,20 540,60 C720,100 900,20 1080,60 C1260,100 1380,40 1440,60 L1440,120 L0,120 Z"/>
+        </svg>
+        <svg class="wave w2" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+          <path fill="rgba(255,255,255,0.22)" d="M0,70 C200,20 400,110 600,70 C800,30 1000,110 1200,70 C1320,50 1400,80 1440,70 L1440,120 L0,120 Z"/>
+        </svg>
+        <svg class="wave w3" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+          <path fill="#0f4c63" d="M0,40 C240,80 480,10 720,40 C960,70 1200,10 1440,40 L1440,90 L0,90 Z"/>
+        </svg>
+        <div class="bottle-wrap" id="bottleWrap" role="button" tabindex="0" aria-label="Open the bottle">
+          <div class="cork"></div>
+          <svg viewBox="0 0 90 210" width="92" height="200" aria-hidden="true">
+            <defs>
+              <linearGradient id="glassTint" x1="0" x2="1">
+                <stop offset="0" stop-color="#d7f4ea" stop-opacity="0.35"/>
+                <stop offset="0.45" stop-color="#8ad4c4" stop-opacity="0.55"/>
+                <stop offset="1" stop-color="#2f8f8a" stop-opacity="0.4"/>
+              </linearGradient>
+            </defs>
+            <rect x="34" y="26" width="22" height="22" rx="4" fill="url(#glassTint)" stroke="#7fb8b0" stroke-width="2"/>
+            <path d="M28,48 C28,48 22,62 22,78 L22,176 C22,188 34,198 45,198 C56,198 68,188 68,176 L68,78 C68,62 62,48 62,48 Z" fill="url(#glassTint)" stroke="#6aa8a0" stroke-width="2.2"/>
+            <path d="M30,86 L60,86 L58,168 C56,176 50,182 45,182 C40,182 34,176 32,168 Z" fill="#f6e4b8" opacity="0.92"/>
+            <path d="M34,54 L38,170" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+            <ellipse cx="45" cy="78" rx="18" ry="6" fill="rgba(255,255,255,0.18)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="scroll-paper" id="bottleScroll">
+        <p id="bottleLine"></p>
+        <span class="scroll-sign">— washed ashore for you</span>
+      </div>
+      <p class="bottle-hint reveal">Tap again for another line the tide kept for you.</p>
+    </section>
+
     <section id="final">
       <h2 class="title reveal">Make a Wish ✨</h2>
       <button id="surpriseBtn" class="big-btn reveal">Release Lanterns 🏮</button>
@@ -959,6 +1114,16 @@
         { amt: "a pinch", item: "shared playlists and unsent drafts we still mean" },
         { amt: "1 handful", item: "inside jokes that only two people understand" },
         { amt: "to taste", item: "hope for the day the map finally folds in half" }
+      ],
+      bottleLines: [
+        "Rhian, if beauty had a timezone, it would wait for yours.",
+        "The ocean borrowed your name and now every wave sounds a little like you.",
+        "I folded a secret into this glass: you look like trouble I would swim toward.",
+        "Distance is only water. You, somehow, are the shoreline I keep choosing.",
+        "If a smile could start a current, yours already pulled me out of Dhaka.",
+        "Keep the cork. I might send another confession when the moon is being dramatic.",
+        "You are the plot twist in an otherwise ordinary map.",
+        "Tell the tide I said hi. Tell it I saved the prettiest bottle for you."
       ]
     };
 
@@ -1194,6 +1359,38 @@
       });
       renderNotes(notes);
       input.value = '';
+    });
+
+    const bottleWrap = $('#bottleWrap');
+    const bottleScroll = $('#bottleScroll');
+    const bottleLine = $('#bottleLine');
+    let bottleOpened = false;
+    let bottleIndex = 0;
+
+    function showBottleLine() {
+      const lines = CONFIG.bottleLines;
+      bottleLine.textContent = lines[bottleIndex % lines.length];
+      bottleIndex += 1;
+      bottleScroll.classList.add('open');
+    }
+
+    function openBottle() {
+      if (!bottleOpened) {
+        bottleOpened = true;
+        bottleWrap.classList.add('open');
+        setTimeout(showBottleLine, 420);
+        return;
+      }
+      bottleScroll.classList.remove('open');
+      setTimeout(showBottleLine, 280);
+    }
+
+    bottleWrap.addEventListener('click', openBottle);
+    bottleWrap.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openBottle();
+      }
     });
 
     function runCounter() {
