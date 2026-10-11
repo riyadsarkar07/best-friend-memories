@@ -340,11 +340,27 @@
     }
     .pframe img { width: 100%; height: 100%; object-fit: cover; }
     .pframe.noimg { background: linear-gradient(135deg, #FFD700, #FFC0CB); }
+    .polaroid.portrait .pframe {
+      height: 318px;
+    }
+    .polaroid.portrait .pframe img {
+      object-position: center 18%;
+    }
     .polaroid figcaption {
       font-family: 'Dancing Script', cursive;
       font-size: 1.45rem;
       margin-top: 14px;
       color: var(--dark-text);
+    }
+    .polaroid-note {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      margin-top: 6px;
+      color: var(--muted);
+      font-style: italic;
+      letter-spacing: 0.2px;
     }
 
     .envelope {
@@ -780,6 +796,7 @@
       .tl-item::after, .tl-item:nth-child(even)::after { left: 3px; right: auto; }
       .polaroid { width: 200px; }
       .pframe { height: 180px; }
+      .polaroid.portrait .pframe { height: 268px; }
       .counter { padding: 22px 28px; }
       .clock, .live-card { min-width: 0; width: 100%; max-width: 360px; }
       .side-bloom { display: none; }
@@ -1212,6 +1229,7 @@
       photos: [
         { src: "images/her-beautiful-smile.jpg", caption: "Her Beautiful Smile 🌸" },
         { src: "images/a-little-moment.jpg", caption: "A Little Moment of Her 💗" },
+        { src: "images/your-sweetest-smile.jpg", caption: "Your Sweetest Smile 💗", note: "A smile that makes every moment special.", portrait: true },
         { src: "images/1.jpg", caption: "First Memory" }, { src: "images/2.jpg", caption: "Smile!" },
         { src: "images/3.jpg", caption: "Good times" }, { src: "images/4.jpg", caption: "Always together" }
       ],
@@ -1400,7 +1418,9 @@
     ).join('');
     $('#polaroids').innerHTML = CONFIG.photos.map((p, i) => {
       const tilt = ((i % 2 ? 1 : -1) * (3 + Math.random() * 4)).toFixed(1);
-      return `<figure class="polaroid reveal" style="--r:${tilt}deg" data-i="${i}"><div class="pframe"><img src="${p.src}" alt="${p.caption}"></div><figcaption>${p.caption}</figcaption></figure>`;
+      const extra = p.portrait ? ' portrait' : '';
+      const note = p.note ? `<span class="polaroid-note">${p.note}</span>` : '';
+      return `<figure class="polaroid reveal${extra}" style="--r:${tilt}deg" data-i="${i}"><div class="pframe"><img src="${p.src}" alt="${p.caption}"></div><figcaption>${p.caption}${note}</figcaption></figure>`;
     }).join('');
 
     $$('.pframe img').forEach(img => {
